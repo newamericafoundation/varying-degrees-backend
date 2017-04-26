@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo starting import
+
+for f in ./cleaned_data/*; do collection_name=${f##./cleaned_data/}; collection_name=${collection_name%.csv}; echo importing ${collection_name}; mongoimport --db higher_ed_survey --collection ${collection_name} --type csv --headerline --file ${f}; done
+
+echo done importing

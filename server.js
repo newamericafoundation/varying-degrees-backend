@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 const path = require('path');
-const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb://heroku_2l5qrfnd:bm3ve3469v2or4vpb1c2ajq0rm@ds151909.mlab.com:51909/heroku_2l5qrfnd";
+const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb://test_user:test@ds123381.mlab.com:23381/heroku_5cdsjn00";
 var app = express();
 app.use(bodyParser.json());
 
@@ -42,66 +42,3 @@ app.get('/api/:collection', (req, res) => {
     }
   });
 });
-
-app.get('/api/institution-list', (req, res) => {
-  db.collection('inst_combined').find({}, { name: 1, path: 1 }).toArray(function(err, docs) {
-    docs.sort(sortAlpha);
-    if (err) {
-      handleError(res, err.message, "Failed to get institutions.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
-app.get('/api/state/:path', (req, res) => {
-  db.collection('states_combined').findOne({path:req.params.path}, function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get institutions.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
-app.get('/api/institution/:path', (req, res) => {
-  db.collection('inst_combined').findOne({path:req.params.path}, function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get institutions.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
-// app.get('/api/states/:type', (req, res) => {
-//   db.collection('fake_states').find({}).toArray(function(err, docs) {
-//     console.log(docs);
-//     if (err) {
-//       handleError(res, err.message, "Failed to get");
-//     } else {
-//       res.status(200).json(docs);
-//     }
-//   });
-// });
-
-// app.get('/api/data-download/:collection/:type', (req, res) => {
-//   const { collection, type } = req.params;
-//   let whichField = {};
-//   whichField[type] = 1;
-//   console.log(whichField);
-//   console.log(collection, type);
-
-//   console.log(req.params.collection);
-//   db.collection('higher-ed-survey').find({}, whichField).toArray(function(err, docs) {
-//     docs = docs.map((d) => {
-//       return d[type][0];
-//     })
-//     // docs.sort(sortAlpha);
-//     if (err) {
-//       handleError(res, err.message, "Failed to get");
-//     } else {
-//       res.status(200).json(docs);
-//     }
-//   });
-// });

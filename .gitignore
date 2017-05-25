@@ -2,4 +2,15 @@
 
 data_processing/cleaned_data
 
+core.min.js
+
+dump/
+
+screenshots/0/
+screenshots/1/
+screenshots/2/
+screenshots/3/
+screenshots/4/
+screenshots/5/
+
 node_modules/

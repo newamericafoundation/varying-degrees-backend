@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "screenshot": "node take_screenshots.js",
     "start-dev": "NODE_ENV=development node server.js",
     "start": "node server.js"
   },
@@ -21,6 +22,8 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "mongodb": "^2.2.23",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "webpage": "^0.3.0",
+    "webshot": "^0.18.0"
   }
 }

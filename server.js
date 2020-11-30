@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 const path = require('path');
-const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb://test_user:test@ds123381.mlab.com:23381/heroku_5cdsjn00";
+const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb+srv://test_user:test@cluster-varying-degrees.pr0zd.mongodb.net/heroku_5cdsjn00?retryWrites=true&w=majority";
 var app = express();
 app.use(bodyParser.json());
 

@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 const path = require('path');
-const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb://test_user:test@ds123381.mlab.com:23381/heroku_5cdsjn00";
+const dbUrl = process.env.NODE_ENV == "development" ? "mongodb://localhost:27017/higher_ed_survey" : "mongodb://test_user:test@cluster-varying-degrees-shard-00-00.pr0zd.mongodb.net:27017,cluster-varying-degrees-shard-00-01.pr0zd.mongodb.net:27017,cluster-varying-degrees-shard-00-02.pr0zd.mongodb.net:27017/heroku_5cdsjn00?ssl=true&replicaSet=atlas-bv0fyw-shard-0&authSource=admin&retryWrites=true&w=majority";
 var app = express();
 app.use(bodyParser.json());
 
@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 app.get('/api/:collection', (req, res) => {
   db.collection(req.params.collection).find().toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to get collection");
+      console.log(res, err.message, "Failed to get collection");
     } else {
       res.status(200).json(docs);
     }
